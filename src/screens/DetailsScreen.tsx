@@ -7,6 +7,8 @@ type Props = NativeStackScreenProps<RootStackParamList,'Details'>
 
 const DetailsScreen = ({route,navigation}: Props) => {
 
+  const status = route.params.character.status
+
   return (
     <View style = {styles.container}>
       <Image 
@@ -17,10 +19,27 @@ const DetailsScreen = ({route,navigation}: Props) => {
         resizeMode='stretch'
       />
       <Text style={styles.title}>{route.params.character.name}</Text>
+      <View style = {{
+        flexDirection : 'row',
+        marginHorizontal : 16,
+        alignItems : 'center'
+      }}>
+        <View style={[styles.dot_indicator,{
+          backgroundColor : status==='Alive'? '#0FE944' : '#555555'
+        }]}></View>
+      <Text style={styles.text}>{status}   - </Text>
       <Text style={styles.text}>{route.params.character.gender}</Text>
+      </View>
+      <View style = {styles.details}>
+      <Text style = {styles.header}>Species: </Text>
       <Text style={styles.text}>{route.params.character.species}</Text>
+
+      <Text style = {styles.header}>Last known location:</Text>
       <Text style={styles.text}>{route.params.character.origin.name}</Text>
-      <Text style={styles.text}>{route.params.character.status}</Text>
+
+      <Text style = {styles.header}>No of Episode:</Text>
+      <Text style={styles.text}>{route.params.character.episode.length}</Text>
+      </View>
     </View>
   )
 }
@@ -28,12 +47,14 @@ const DetailsScreen = ({route,navigation}: Props) => {
 const styles = StyleSheet.create({
   container :{
     flex : 1,
-    backgroundColor : '#fff'
+    backgroundColor : '#fff',
   },
   img:{
     width : '100%',
     height: '100%',
     flex : 0.5,
+    borderBottomLeftRadius : 8,
+    borderBottomRightRadius : 8
   },
   title:{
     fontSize : 20,
@@ -43,6 +64,24 @@ const styles = StyleSheet.create({
   text:{
     fontSize : 18,
     marginStart : 16
+  },
+  dot_indicator:{
+    height : 8,
+    width : 8,
+    borderRadius : 4,
+  },
+  details:{
+    marginHorizontal : 16,
+    marginVertical : 16,
+    flexDirection : 'column',
+    flexGrow : 0.2,
+    justifyContent : 'space-evenly'
+  },
+  header:{
+    fontSize : 20,
+    fontStyle : 'normal',
+    fontWeight : '600',
+    color : '#000',
   }
 }) 
 

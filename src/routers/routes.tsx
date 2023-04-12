@@ -6,7 +6,7 @@ import DetailsScreen from '../screens/DetailsScreen';
 import CharacterData  from '../models/CharacterData';
 
 export type RootStackParamList = {
-    HomeScreen: undefined;
+    Home: undefined;
     Details: {character: CharacterData};
   };
 
@@ -17,7 +17,7 @@ const AppContainer = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName='HomeScreen'
+                initialRouteName='Home'
                 screenOptions={{
                     headerLargeTitle: true,
                     headerStyle: {
@@ -27,7 +27,7 @@ const AppContainer = () => {
                 }}
             >
                 <Stack.Screen
-                    name='HomeScreen'
+                    name='Home'
                     component={HomeScreen}
                 />
                 <Stack.Screen
