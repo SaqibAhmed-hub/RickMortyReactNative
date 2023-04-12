@@ -3,11 +3,16 @@ import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import HomeScreen from '../screens/HomeScreen';
 import DetailsScreen from '../screens/DetailsScreen';
+import CharacterData  from '../models/CharacterData';
 
+export type RootStackParamList = {
+    HomeScreen: undefined;
+    Details: {character: CharacterData};
+  };
 
 const AppContainer = () => {
 
-    const Stack = createNativeStackNavigator();
+    const Stack = createNativeStackNavigator<RootStackParamList>();
 
     return (
         <NavigationContainer>
@@ -24,13 +29,11 @@ const AppContainer = () => {
                 <Stack.Screen
                     name='HomeScreen'
                     component={HomeScreen}
-                >
-                </Stack.Screen>
+                />
                 <Stack.Screen
-                    name='Details'
+                    name="Details"
                     component={DetailsScreen}
-                >
-                </Stack.Screen>
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );

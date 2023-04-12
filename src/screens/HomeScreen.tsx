@@ -1,36 +1,14 @@
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
 import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { RootStackParamList } from '../routers/routes';
+import CharacterData from '../models/CharacterData';
 
-export type OriginData ={
-  name : string,
-  url : string
-}
+type Props = NativeStackScreenProps<RootStackParamList, 'HomeScreen'>
 
-export type CharacterData ={
-   id: number,
-   name: string,
-   status: string,
-   species : string,
-   type: string,
-   gender:string,
-   image : string,
-   origin: OriginData,
-   episode : string[],
-   url: string,
-   created: string
-   
-}
+export default function HomeScreen({route,navigation}: Props, character: CharacterData) {
 
-type RootStackParamList = {
-  Home: undefined;
-  Details: { characterItem: CharacterData };
-};
-
-
-export default function HomeScreen(prop : CharacterData , navigation: NativeStackScreenProps<RootStackParamList,'Details'>) {
-
-  const [data, setData] = useState([prop]);
+  const [data, setData] = useState([character]);
 
   useEffect(() => {
     getData();
@@ -60,7 +38,9 @@ export default function HomeScreen(prop : CharacterData , navigation: NativeStac
         renderItem={({ item }) => (
           <TouchableOpacity 
             onPress={()=> {
-                navigation.navigation.navigate("Details" ,{characterItem: item})
+                navigation.navigate('Details',{
+                  character: item
+                })
             }}
           >
           <View style={styles.innerview}>
